@@ -53,7 +53,7 @@ export const findOneQuestion = async (id, userId) => {
   }
 };
 
-export const getSpecificQuestionAndTheirComents = async (id) => {
+export const getSpecificQuestion = async (id) => {
   try {
     const where = {
       where: {

@@ -11,16 +11,16 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      questionId: {
+      answerId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'Questions',
+          model: 'Answers',
           key: 'id',
         },
       },
       comment: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,

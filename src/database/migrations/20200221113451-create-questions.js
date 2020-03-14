@@ -17,7 +17,7 @@ module.exports = {
       },
       question: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       image: {
         type: Sequelize.STRING,

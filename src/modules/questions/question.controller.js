@@ -5,10 +5,10 @@ import {
   upadateQuestion,
   deleteQuestion,
   findOneQuestion,
-  getSpecificQuestionAndTheirComents,
+  getSpecificQuestion,
 } from '../../services/question/question.services';
 
-import { findAllComment } from '../../services/comments/comments.services';
+import { getAllAnswerToAQuestion } from '../../services/answers/answers.services';
 import {
   QUESTION_SUCCESS,
   SERVER_ERROR,
@@ -84,10 +84,10 @@ export const fetchOneSpeciicfQuestionWithComment = async (req, res) => {
   try {
     const { id: questionId } = req.params;
 
-    const question = await getSpecificQuestionAndTheirComents(questionId);
-    const comments = await findAllComment(questionId);
+    const question = await getSpecificQuestion(questionId);
+    const answers = await getAllAnswerToAQuestion(questionId);
 
-    if (comments.length === 0) {
+    if (answers.length === 0) {
       return res.status(200).json({
         status: 200,
         message: QUESTION_RETRIEVED,
@@ -101,7 +101,7 @@ export const fetchOneSpeciicfQuestionWithComment = async (req, res) => {
     return res.status(200).json({
       status: 200,
       message: QUESTION_RETRIEVED,
-      data: { question, comments },
+      data: { question, answers },
     });
   } catch (error) {
     return Response(res, { status: 500, message: SERVER_ERROR });

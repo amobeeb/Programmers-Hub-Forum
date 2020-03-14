@@ -2,9 +2,9 @@ import models from '../../database/models';
 
 const { comments } = models;
 
-export const createComment = async (userId, comment, questionId) => {
+export const createComment = async (item, answerId) => {
   try {
-    return await comments.create({ userId, comment, questionId });
+    return await comments.create({ ...item, answerId });
   } catch (error) {
     return error;
   }

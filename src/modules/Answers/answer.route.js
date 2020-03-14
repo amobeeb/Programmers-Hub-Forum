@@ -8,14 +8,14 @@ const answerRoute = express.Router();
 /**
  * @swagger
  *
- * /:questionId/answer/:
- * post:
- *  tags:
+ * /:questionId/answer:
+ *  post:
+ *   tags:
  *    - Answer
- *  description: User can answer to another user question
- *  produces:
+ *   description: User can answer to another user question
+ *   produces:
  *    - application/json
- *  parameters:
+ *   parameters:
  *    - name: image_url
  *      description: any image that can describe the answer
  *      required: false
@@ -36,7 +36,7 @@ const answerRoute = express.Router();
  *      required: true
  *      type: uuid
  *      in: requestBody
- *  responses:
+ *   responses:
  *      201:
  *        description: successfully created
  *      500:
@@ -47,21 +47,21 @@ answerRoute.post('/:questionId/answer', validateInput(answerSchema), saveAnswer)
 /**
  * @swagger
  *
- * /:questionId/editAnswer/:
- * patch:
- *  tags:
- *    - Answer
- *  description: User can answer to another user question
- *  produces:
+ * /:answerId/editAnswer/:
+ *  patch:
+ *   tags:
+ *    - Edit Answer
+ *   description: User or moderator can edit their answer
+ *   produces:
  *    - application/json
- *  parameters:
+ *   parameters:
  *    - name: image_url
  *      description: any image that can describe the answer
  *      required: false
  *      type: string
  *      in: formData
  *    - name: answer
- *      description: response to a question
+ *      description: edit an already created answer
  *      required: true
  *      type: text
  *      in: formData
@@ -85,9 +85,11 @@ answerRoute.post('/:questionId/answer', validateInput(answerSchema), saveAnswer)
  *      required: true
  *      type: string
  *      in: requestBody
- *  responses:
- *      201:
+ *   responses:
+ *      200:
  *        description: successfully created
+ *      401:
+ *        description: Unauthorized
  *      500:
  *        description: Internal server error
  */
@@ -96,14 +98,14 @@ answerRoute.patch('/:answerId/editAnswer', validateInput(editAnswwerSchema), edi
 /**
  * @swagger
  *
- * /:answerId/editAnswer/:
- * patch:
- *  tags:
- *    - Answer
- *  description: User can answer to another user question
- *  produces:
+ * /:answerId/deleteAnswer:
+ *  delete:
+ *   tags:
+ *    - Delete Answer
+ *   description: User or moderator can delete an answer
+ *   produces:
  *    - application/json
- *  parameters:
+ *   parameters:
  *    - name: userId
  *      description: UserId
  *      required: true
@@ -114,9 +116,11 @@ answerRoute.patch('/:answerId/editAnswer', validateInput(editAnswwerSchema), edi
  *      required: true
  *      type: string
  *      in: requestBody
- *  responses:
- *      201:
+ *   responses:
+ *      200:
  *        description: successfully created
+ *      401:
+ *        description: Unauthorized
  *      500:
  *        description: Internal server error
  */

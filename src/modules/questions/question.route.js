@@ -48,7 +48,6 @@ const questionRoutes = express.Router();
  *        in: formData
  *        required: true
  *        type: string
-
  *    responses:
  *      201:
  *        description: Successfully created a question
@@ -60,7 +59,7 @@ questionRoutes.post('/createQuestion', validateInput(questionSchema), imageUploa
 /**
  * @swagger
  *
- * /updateQuestion/:id:
+ * /:id/updateQuestion:
  *  patch:
  *    tags:
  *      - Update Question
@@ -110,7 +109,7 @@ questionRoutes.patch(
 /**
  * @swagger
  *
- * /deleteQuestion/:id:
+ * /:id/deleteQuestion:
  *  delete:
  *    tags:
  *      - Delete Question
@@ -130,15 +129,15 @@ questionRoutes.patch(
  *      500:
  *        description: Server error message
  */
-questionRoutes.delete('/deleteQuestion/:id', destroyQuestion);
+questionRoutes.delete('/:id/deleteQuestion/', destroyQuestion);
 
 /**
  * @swagger
  *
- * /:questionId/get:
- *  delete:
+ * /:id/fetch-question:
+ *  get:
  *    tags:
- *      - Delete Question
+ *      - Specific Question
  *    description: User should be able to get a question and all comments attached to it
  *    produces:
  *      - application/json
@@ -153,5 +152,5 @@ questionRoutes.delete('/deleteQuestion/:id', destroyQuestion);
  *      500:
  *        description: Server error message
  */
-questionRoutes.get('/:id/fetch-question', fetchOneSpeciicfQuestionWithComment);
+questionRoutes.get('/:id/fetch-question/', fetchOneSpeciicfQuestionWithComment);
 export default questionRoutes;
